@@ -1,0 +1,263 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@font-face {
+  font-family: 'Rekalgera-Regular';
+  src: url('/Rekalgera-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Rekalgera';
+  src: url('/Rekalgera-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'NetflixSans';
+  src: url('/NetflixSans-Regular.otf') format('opentype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'NetflixSans';
+  src: url('/NetflixSans-Bold.otf') format('opentype');
+  font-weight: bold;
+}
+
+body {
+  background-color: #0a0a0c;
+  color: white;
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Ocultar scrollbars globais (Chromium/Safari/Edge) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ocultar scrollbars no Firefox */
+html, body {
+  scrollbar-width: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Realistic iOS Glassmorphism styling with light-reaction sweep animation */
+.glass-button-hover {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.glass-button-active {
+  overflow: hidden !important;
+  background: 
+    radial-gradient(150% 100% at 50% 0%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 80%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%) !important;
+  backdrop-filter: blur(28px) !important;
+  -webkit-backdrop-filter: blur(28px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  border-top-color: rgba(255, 255, 255, 0.55) !important;
+  border-left-color: rgba(255, 255, 255, 0.45) !important;
+  box-shadow: 
+    0 16px 36px rgba(0, 0, 0, 0.35),
+    inset 0 2px 3px rgba(255, 255, 255, 0.55),
+    inset 0 -1.5px 2px rgba(255, 255, 255, 0.25) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.glass-button-hover {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+.glass-button-hover:hover {
+  background: rgba(255, 255, 255, 0.01) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Blurry lantern spotlight tracker */
+.glass-button-active::after, .glass-button-hover::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: radial-gradient(
+    70px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  ) !important;
+  opacity: 0 !important;
+  transition: opacity 0.4s ease !important;
+  pointer-events: none !important;
+  mix-blend-mode: overlay !important;
+  z-index: 1 !important;
+}
+
+.glass-button-active:hover::after, .glass-button-hover:hover::after {
+  opacity: 1 !important;
+}
+
+/* ==========================================================================
+   VIDEO.JS NETFLIX THEME OVERRIDES
+   ========================================================================== */
+
+/* Main Wrapper */
+.video-js {
+  font-family: 'NetflixSans', 'Inter', sans-serif !important;
+  background-color: #000 !important;
+}
+
+.video-js .vjs-tech {
+  object-fit: contain !important; /* Preserves aspect ratio with black bars if needed */
+}
+
+/* Control Bar Background */
+.vjs-control-bar {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0,0,0,0.4) 70%, transparent 100%) !important;
+  height: 100px !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  padding-bottom: 15px !important;
+  padding-inline: 20px !important;
+}
+
+/* Big Play Button (Center) */
+.video-js .vjs-big-play-button {
+  background-color: transparent !important;
+  border: none !important;
+  font-size: 8em !important;
+  color: white !important;
+  width: 120px !important;
+  height: 120px !important;
+  margin-top: -60px !important;
+  margin-left: -60px !important;
+  transition: transform 0.2s ease, opacity 0.2s ease !important;
+}
+.video-js:hover .vjs-big-play-button {
+  background-color: transparent !important;
+  transform: scale(1.1) !important;
+}
+
+/* Show Big Play Button when Paused */
+.video-js.vjs-paused .vjs-big-play-button {
+  display: block !important;
+}
+
+/* Progress Bar (Scrubber) - Positioned above buttons */
+.video-js .vjs-progress-control {
+  position: absolute !important;
+  top: 15px !important;
+  left: 20px !important;
+  right: 20px !important;
+  width: auto !important;
+  height: 20px !important;
+  align-items: center !important;
+  display: flex !important;
+}
+
+.video-js .vjs-progress-holder {
+  height: 6px !important;
+  border-radius: 4px !important;
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  transition: height 0.2s ease !important;
+  margin: 0 !important;
+}
+
+.video-js .vjs-progress-holder:hover {
+  height: 10px !important;
+}
+
+.video-js .vjs-play-progress {
+  background-color: #e50914 !important; /* Netflix Red */
+  border-radius: 4px !important;
+}
+
+.video-js .vjs-play-progress:before {
+  color: #e50914 !important;
+  font-size: 1.4em !important;
+  top: -6px !important;
+  text-shadow: 0 0 10px rgba(229, 9, 20, 0.8) !important;
+}
+
+/* Load Progress (Buffered) */
+.video-js .vjs-load-progress {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 4px !important;
+}
+
+/* Buttons and Controls (Play, Vol, Fullscreen) */
+.video-js .vjs-button {
+  color: white !important;
+  margin: 0 10px !important;
+  height: 40px !important;
+  width: 40px !important;
+  transition: transform 0.2s ease, color 0.2s ease !important;
+}
+
+.video-js .vjs-button > .vjs-icon-placeholder:before {
+  font-size: 2.5em !important;
+  line-height: 40px !important;
+}
+
+.video-js .vjs-button:hover {
+  transform: scale(1.15) !important;
+}
+
+/* Move Fullscreen to the far right */
+.vjs-fullscreen-control {
+  margin-left: auto !important;
+}
+
+/* Time display adjustments */
+.vjs-remaining-time, .vjs-time-divider, .vjs-duration, .vjs-current-time {
+  font-size: 1.2em !important;
+  font-weight: bold !important;
+  margin-top: 5px !important;
+  line-height: 40px !important;
+  padding: 0 5px !important;
+}
+
+.vjs-picture-in-picture-control {
+  display: none !important;
+}
+
+/* ==========================================================================
+   SUBTITLE (WEBVTT) STYLING (NETFLIX STYLE)
+   ========================================================================== */
+::cue {
+  background-color: transparent;
+  color: white;
+  font-family: 'NetflixSans', 'Inter', sans-serif;
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-shadow: 
+    0px 0px 4px rgba(0, 0, 0, 1),
+    0px 0px 6px rgba(0, 0, 0, 1),
+    2px 2px 4px rgba(0, 0, 0, 1),
+    -2px -2px 4px rgba(0, 0, 0, 1),
+    2px -2px 4px rgba(0, 0, 0, 1),
+    -2px 2px 4px rgba(0, 0, 0, 1);
+}
